@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+//Admin
+Route::group(['namespace' => 'Controllers'], function () {
+    Route::group([
+        'namespace' => 'Admin',
+        'prefix' => 'admin',
+        'name' => 'admin.',
+    ],
+        function() {
+            Route::get('/login',[LoginController::class,'index'])->name('login');
+            Route::post('/login',[LoginController::class,'store'])->name('login');
+            Route::middleware(['auth'])->group(function (){
+                Route::get('/dashboard',[MainController::class,'index'])->name('dashboard');
+            });
+    });
 });
