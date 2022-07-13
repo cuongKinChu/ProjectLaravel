@@ -19,7 +19,10 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->integer('price');
             $table->text('description');
+            $table->tinyInteger('type_id');
             $table->timestamps();
+
+            $table->foreign('type_id')->references('id')->on('type');
         });
     }
 
