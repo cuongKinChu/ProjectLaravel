@@ -36,22 +36,12 @@
                                 <div class="form-group">
                                     <label for="inputEmail">Email</label>
                                     <input type="text" name="email" id="inputEmail" class="form-control"
-                                           placeholder="Input email" value="{{ $data->email  }}>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword">Password</label>
-                                    <input type="password" name="password" id="inputPassword" class="form-control"
-                                           placeholder="Input password" value="{{ $data->password  }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="confirm_password">Confirm Password</label>
-                                    <input id="confirm_password" class="form-control" type="password"
-                                           name="confirm_password" placeholder="Input password again"/>
+                                           placeholder="Input email" value="{{ $data->email  }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputAddress">Address</label>
                                     <input type="text" name="address" id="inputAddress" class="form-control"
-                                           placeholder="Input your address">
+                                           placeholder="Input your address"  value="{{ $data->address  }}">
                                 </div>
                                 @include('admin.alert')
                             </div>
