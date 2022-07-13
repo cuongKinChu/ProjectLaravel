@@ -46,6 +46,7 @@
                                 <label for="inputDescription">Mô Tả</label>
                                 <textarea id="content" name="description" class="form-control"></textarea>
                         </div>
+                        @include('admin.alert')
                     </div>
                 </div>
                 <!-- /.card-body -->

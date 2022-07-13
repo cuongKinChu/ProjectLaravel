@@ -37,11 +37,12 @@ Route::group([
                     'name' => 'product.',
                 ],
                     function() {
+                        Route::get('/list',[ProductController::class,'index'])->name('index');
                         Route::get('/add',[ProductController::class,'create'])->name('add');
                         Route::post('/add',[ProductController::class,'store'])->name('add');
+                        Route::get('/edit-{id}',[ProductController::class,'edit'])->name('edit');
+                        Route::post('/edit-{id}',[ProductController::class,'update'])->name('edit');
+                        Route::get('/delete-{id}',[ProductController::class,'destroy'])->name('delete');
             });
-
-                #Upload
-                Route::post('upload/service',[\App\Http\Services\UploadService::class,'store']);
         });
 });

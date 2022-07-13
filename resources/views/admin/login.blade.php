@@ -12,7 +12,7 @@
     <title>{{ $title }}</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('fontawesome-free/css/all.css') }} " rel="stylesheet" type="text/css">
 
 
     <!-- Custom styles for this template-->
@@ -41,7 +41,6 @@
                                     </div>
                                     <form class="user" action="" method="post" >
                                         @csrf
-
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" name="email"
                                              id="exampleInputEmail" placeholder="Enter Email Address...">
