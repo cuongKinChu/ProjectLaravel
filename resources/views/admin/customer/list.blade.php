@@ -44,11 +44,13 @@
                                 <td class="project_progress">{{ $customer->email }}</td>
                                 <td class="project_progress">{{ $customer->address }}</td>
                                 <td class="project-actions ">
-                                    {{--                          <a class="btn btn-info btn-sm" href="{{ route('edit',['id'=>$customer->id]) }}">--}}
-                                    <i class="fas fa-pencil-alt"></i>
+                                    <a class="btn btn-info btn-sm" href="{{ route('customer.edit',['id'=>$customer->id]) }}">
+                                        <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                                              <a class="btn btn-danger btn-sm" href="{{ route('customer.delete',['id'=>$customer->id]) }}" onclick="return confirm('Are you sure to delete?')">
-                                    <i class="fas fa-trash"></i>
+                                    <a class="btn btn-danger btn-sm"
+                                       href="{{ route('customer.delete',['id'=>$customer->id]) }}"
+                                       onclick="return confirm('Are you sure to delete?')">
+                                        <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

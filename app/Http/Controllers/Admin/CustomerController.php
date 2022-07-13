@@ -91,6 +91,15 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //
+        $data = $this->validate($request,[
+            'full_name' => 'required',
+            'email' => 'required|email:filter',
+            'address' => 'required'
+        ]);
+        Customer::updateCustomer($id,$data['full_name'],$data['email'],$data['address']);
+        Session::flash('success', 'Update customer successful');
+        return redirect()->route('customer.index');
     }
 
     /**
