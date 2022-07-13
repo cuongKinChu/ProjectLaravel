@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Customers;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -16,7 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customer = Customers::orderby('id', 'DESC')->paginate(5);
+        $customer = Customer::orderby('id', 'DESC')->paginate(5);
         return view('admin.customer.list', [
             'data' => $customer,
             'title' => 'List account customers'
@@ -53,7 +53,7 @@ class CustomerController extends Controller
         $password_h = bcrypt($request->password);
         $data = $request->only('full_name','email','password','address');
         $data['password'] = $password_h;
-        Customers::create($data);
+        Customer::create($data);
         return redirect()->route('customer.index');
     }
 
@@ -99,8 +99,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        if (Customers::find($id)){
-            Customers::find($id)->delete();
+        if (Customer::find($id)){
+            Customer::find($id)->delete();
             Session::flash('success', 'Delete customer successful');
             return redirect()->back();
         }

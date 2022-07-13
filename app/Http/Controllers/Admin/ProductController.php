@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Products;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Products::orderby('id', 'DESC')->paginate(5);
+        $product = Product::orderby('id', 'DESC')->paginate(5);
         return view('admin.product.list', [
             'data' => $product,
             'title' => 'List products'
@@ -64,7 +64,7 @@ class ProductController extends Controller
 
         $image_name = $image->getClientOriginalName();
 
-        $product = new Products([
+        $product = new Product([
             'product_name' => $request->get('product_name'),
             'image' => $image_name,
             'price' => $request->get('price'),
@@ -94,7 +94,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Products::find($id);
+        $product = Product::find($id);
         return view('admin.product.edit', [
             'data' => $product,
             'title' => 'Edit products'
@@ -131,7 +131,7 @@ class ProductController extends Controller
 
         $image_name = $image->getClientOriginalName();
 
-        $product = Products::find($id);
+        $product = Product::find($id);
         $product->product_name = $request->get('product_name');
         $product->image = $image_name;
         $product->price = $request->get('price');
@@ -149,7 +149,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Products::find($id)->delete();
+        Product::find($id)->delete();
         Session::flash('success', 'Delete product successful');
         return redirect()->back();
     }
