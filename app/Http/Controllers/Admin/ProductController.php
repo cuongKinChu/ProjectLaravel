@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //Display a listing of the resource.
     public function index()
     {
         $product = Product::orderby('id', 'DESC')->paginate(5);
@@ -23,11 +19,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //Show the form for creating a new resource.
     public function create()
     {
         return view('admin.product.add', [
@@ -35,63 +27,29 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+    //Store a newly created resource in storage.
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $data = $this->validate($request, [
             'product_name' => 'required',
             'price' => 'required|min:0|not_in:0',
             'description' => 'required',
         ]);
+        $image_name = $this->uploadImage($request);
 
-        // Kiểm tra xem người dùng có upload file nên không
-        if (!$request->hasFile('image')) {
-            // Nếu không thì in ra thông báo
-            Session::flash('error', 'Please select the file you want to upload');
-            return redirect()->back();
-        }
-        $request->validate([
-            'image' => 'mimes:jpg,bmg,png'
-        ]);
-        // Nếu có thì thục hiện lưu trữ file vào public/images
-        $image = $request->file('image');
-        $storedPath = $image->move('homepage/images', $image->getClientOriginalName());
+        Product::saveProduct($data['product_name'],$image_name, $data['price'],$data['description']);
 
-        $image_name = $image->getClientOriginalName();
-
-        $product = new Product([
-            'product_name' => $request->get('product_name'),
-            'image' => $image_name,
-            'price' => $request->get('price'),
-            'description' => $request->get('description'),
-        ]);
-        $product->save();
         Session::flash('success', 'Add product successful');
         return redirect()->route('product.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+    //Display the specified resource.
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+    //Show the form for editing the specified resource.
     public function edit($id)
     {
         $product = Product::find($id);
@@ -101,56 +59,47 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+    //Update the specified resource in storage.
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $data = $this->validate($request, [
             'product_name' => 'required',
             'price' => 'required|min:0|not_in:0',
             'description' => 'required',
         ]);
+        //Image will be handled by function uploadImage
+        $image_name = $this->uploadImage($request);
 
-        // Kiểm tra xem người dùng có upload file nên không
-        if (!$request->hasFile('image')) {
-            // Nếu không thì in ra thông báo
-            Session::flash('error', 'Please select the file you want to upload');
-            return redirect()->back();
-        }
-        $request->validate([
-            'image' => 'mimes:jpg,bmg,png'
-        ]);
-        // Nếu có thì thục hiện lưu trữ file vào public/images
-        $image = $request->file('image');
-        $storedPath = $image->move('homepage/images', $image->getClientOriginalName());
-
-        $image_name = $image->getClientOriginalName();
-
-        $product = Product::find($id);
-        $product->product_name = $request->get('product_name');
-        $product->image = $image_name;
-        $product->price = $request->get('price');
-        $product->description = $request->get('description');
-        $product->save();
+        Product::updateProduct($id,$data['product_name'],$image_name, $data['price'],$data['description']);
         Session::flash('success', 'Update product successful');
         return redirect()->route('product.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+    //Remove the specified resource from storage.
     public function destroy($id)
     {
         Product::find($id)->delete();
         Session::flash('success', 'Delete product successful');
         return redirect()->back();
     }
+
+    //Upload Image
+    public function uploadImage($image_path)
+    {
+        //Check if the user has uploaded the file
+        if (!$image_path->hasFile('image')) {
+            // If not, print out the message
+            Session::flash('error', 'Please select the file you want to upload');
+            return redirect()->back();
+        }
+        $image_path->validate([
+            'image' => 'mimes:jpg,bmg,png'
+        ]);
+        // If yes, then store the file in public/images
+        $image = $image_path->file('image');
+        $storedPath = $image->move('product-img', $image->getClientOriginalName());
+        // Returns the value of the image name
+        return $image_name = $image->getClientOriginalName();
+    }
+
 }
