@@ -41,5 +41,4 @@ class LoginController extends Controller
         Session::flash('error','Email or Password is wrong');
         return redirect()->back();
     }
-
 }
