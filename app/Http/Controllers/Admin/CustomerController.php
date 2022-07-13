@@ -44,16 +44,14 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,[
+        $data = $this->validate($request,[
             'full_name' => 'required',
             'email' => 'required|email:filter|unique:customers,email',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
+            'address' => 'required'
         ]);
-        $password_h = bcrypt($request->password);
-        $data = $request->only('full_name','email','password','address');
-        $data['password'] = $password_h;
-        Customer::create($data);
+        Customer::saveCustomer($data['full_name'],$data['email'], $data['password'],$data['address']);
         return redirect()->route('customer.index');
     }
 
@@ -76,7 +74,11 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer= Customer::find($id);
+        return view('admin.customer.edit', [
+            'data' => $customer,
+            'title' => 'Edit customer'
+        ]);
     }
 
     /**

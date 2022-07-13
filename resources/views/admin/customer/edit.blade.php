@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Edit Product</h1>
+                        <h1>Update Account Customer</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('product.index') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Product Edit</li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Account Update</li>
                         </ol>
                     </div>
                 </div>
@@ -22,33 +22,38 @@
 
         <!-- Main content -->
         <section class="content p-1">
-            <form action="" method="POST" roles="form" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputName">Tên Sản Phẩm</label>
-                                    <input type="text" name="product_name" id="inputName" class="form-control"
-                                           placeholder="Nhập tên sản phẩm" value="{{ $data -> product_name}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputPrice">Giá Sản Phẩm</label>
-                                    <input type="number" name="price" id="inputPrice" class="form-control"
-                                           placeholder="Nhập giá sản phẩm" value="{{ $data -> price}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputImg">Ảnh Sản Phẩm</label>
-                                    <input class="form-control" type="file" id="formFile" name="image">
+                                    <label for="inputName">Full Name</label>
+                                    <input type="text" name="full_name" id="inputName" class="form-control"
+                                           placeholder="Input full name" value="{{ $data->full_name  }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputDescription">Mô Tả</label>
-                                    <textarea id="content" name="description"
-                                              class="form-control">{{$data->description}}</textarea>
+                                    <label for="inputEmail">Email</label>
+                                    <input type="text" name="email" id="inputEmail" class="form-control"
+                                           placeholder="Input email" value="{{ $data->email  }}>
                                 </div>
+                                <div class="form-group">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" name="password" id="inputPassword" class="form-control"
+                                           placeholder="Input password" value="{{ $data->password  }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm_password">Confirm Password</label>
+                                    <input id="confirm_password" class="form-control" type="password"
+                                           name="confirm_password" placeholder="Input password again"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputAddress">Address</label>
+                                    <input type="text" name="address" id="inputAddress" class="form-control"
+                                           placeholder="Input your address">
+                                </div>
+                                @include('admin.alert')
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -57,8 +62,8 @@
                 </div>
                 <div class="row p-1">
                     <div class="col-12">
-                        <a href="{{ route('index') }}" class="btn btn-secondary">Cancel</a>
-                        <input type="submit" value="Update product" class="btn btn-success float-right">
+                        <a href="{{ route('customer.index') }}" class="btn btn-secondary">Cancel</a>
+                        <input type="submit" value="Update account" class="btn btn-success float-right">
                     </div>
                 </div>
             </form>

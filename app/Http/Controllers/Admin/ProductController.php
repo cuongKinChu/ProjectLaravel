@@ -78,9 +78,15 @@ class ProductController extends Controller
     //Remove the specified resource from storage.
     public function destroy($id)
     {
-        Product::find($id)->delete();
-        Session::flash('success', 'Delete product successful');
-        return redirect()->back();
+        if (Product::find($id)){
+            Product::find($id)->delete();
+            Session::flash('success', 'Delete product successful');
+            return redirect()->back();
+        }
+        else{
+            Session::flash('error', 'Delete product error');
+            return redirect()->route('product.index');
+        }
     }
 
     //Upload Image
