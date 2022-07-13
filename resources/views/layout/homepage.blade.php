@@ -13,7 +13,7 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="{{ asset('homepage/images/favicon.png') }}" type="">
 
-    <title> Feane </title>
+    <title> Bubble Tea </title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('homepage/css/bootstrap.css') }}" />
@@ -23,7 +23,7 @@
     <!-- nice select  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
     <!-- font awesome style -->
-    <link href="{{ asset('homepage/css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('fontawesome-free/all.css') }}" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('homepage/css/style.css') }}" rel="stylesheet" />
@@ -130,6 +130,7 @@
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </form>
+                        </a>
                         <a href="" class="order_online">
                             Order Online
                         </a>
@@ -138,8 +139,8 @@
             </nav>
         </div>
     </header>
+</div>
     <!-- end header section -->
-
 @yield('content');
 
 <!-- footer section -->

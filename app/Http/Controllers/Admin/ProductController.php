@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -15,8 +16,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-        return ;
+        $product = Products::orderby('id','DESC')->paginate(5);
+        return view('admin.product.list',[
+            'data'=>$product,
+            'title' => 'List products'
+        ]);
     }
 
     /**
@@ -40,10 +44,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'product_name' => 'required',
+            'price' => 'required|min:0|not_in:0',
+            'description' => 'required',
+        ]);
+
         // Kiểm tra xem người dùng có upload file nên không
         if (!$request->hasFile('image')) {
             // Nếu không thì in ra thông báo
-            return "Mời chọn file cần upload";
+            Session::flash('error','Please select the file you want to upload');
+            return redirect()->back();
         }
         $request->validate([
             'image'=> 'mimes:jpg,bmg,png'
@@ -61,6 +72,8 @@ class ProductController extends Controller
             'description' => $request->get('description'),
         ]);
         $product ->save();
+        Session::flash('success','Add product successful');
+        return redirect()->route('index');
     }
 
     /**
@@ -82,7 +95,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Products::find($id);
+        return view('admin.product.edit',[
+            'data'=>$product,
+            'title' => 'Edit products'
+        ]);
     }
 
     /**
@@ -94,7 +111,35 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'product_name' => 'required',
+            'price' => 'required|min:0|not_in:0',
+            'description' => 'required',
+        ]);
+
+        // Kiểm tra xem người dùng có upload file nên không
+        if (!$request->hasFile('image')) {
+            // Nếu không thì in ra thông báo
+            Session::flash('error','Please select the file you want to upload');
+            return redirect()->back();
+        }
+        $request->validate([
+            'image'=> 'mimes:jpg,bmg,png'
+        ]);
+        // Nếu có thì thục hiện lưu trữ file vào public/images
+        $image = $request->file('image');
+        $storedPath = $image->move('homepage/img', $image->getClientOriginalName());
+
+        $image_name = $image->getClientOriginalName();
+
+        $product = Products::find($id);
+        $product->product_name = $request->get('product_name');
+        $product->image = $image_name;
+        $product->price = $request->get('price');
+        $product->description = $request->get('description');
+        $product->save();
+        Session::flash('success','Update product successful');
+        return redirect()->route('index');
     }
 
     /**
@@ -105,6 +150,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Products::find($id)->delete();
+        Session::flash('success','Delete product successful');
+        return redirect()->back();
     }
 }
