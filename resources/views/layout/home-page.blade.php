@@ -68,9 +68,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="book.html">Book Table</a>
-                        </li>
                     </ul>
                     <div class="user_option">
                         <a href="" class="user_link">
