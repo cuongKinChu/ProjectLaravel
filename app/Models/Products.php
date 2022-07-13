@@ -10,6 +10,7 @@ class Products extends Model
     protected $table = 'products';
     protected $fillable = ['product_name','image','price','description'];
     public $timestamp = false;
-    
     use HasFactory;
+
+
 }

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\HomePage\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,33 +18,45 @@ use App\Http\Controllers\Admin\ProductController;
 |
 */
 
-
 //Admin
 Route::group([
-        'namespace' => 'Admin',
-        'prefix' => 'admin',
-        'name' => 'admin.',
-    ],
-        function() {
-            Route::get('/login',[LoginController::class,'index'])->name('login');
-            Route::post('/login',[LoginController::class,'store'])->name('login');
-            Route::middleware(['auth'])->group(function (){
-                Route::get('/dashboard',[MainController::class,'index'])->name('dashboard');
-                Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+    'namespace' => 'Admin',
+    'prefix' => 'admin',
+    'name' => 'admin.',
+],
+    function () {
+        Route::get('/login', [LoginController::class, 'index'])->name('login');
+        Route::post('/login', [LoginController::class, 'store'])->name('login');
+        Route::middleware(['auth'])->group(function () {
+            Route::get('/dashboard', [MainController::class, 'index'])->name('dashboard');
+            Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-                #Product
-                Route::group([
-                    'namespace' => 'Product',
-                    'prefix' => 'product',
-                    'name' => 'product.',
-                ],
-                    function() {
-                        Route::get('/list',[ProductController::class,'index'])->name('index');
-                        Route::get('/add',[ProductController::class,'create'])->name('add');
-                        Route::post('/add',[ProductController::class,'store'])->name('add');
-                        Route::get('/edit-{id}',[ProductController::class,'edit'])->name('edit');
-                        Route::post('/edit-{id}',[ProductController::class,'update'])->name('edit');
-                        Route::get('/delete-{id}',[ProductController::class,'destroy'])->name('delete');
-            });
+            #Product
+            Route::group([
+                'namespace' => 'Product',
+                'prefix' => 'product',
+            ],
+                function () {
+                    Route::get('/list', [ProductController::class, 'index'])->name('product.index');
+                    Route::get('/add', [ProductController::class, 'create'])->name('product.add');
+                    Route::post('/add', [ProductController::class, 'store'])->name('product.add');
+                    Route::get('/edit-{id}', [ProductController::class, 'edit'])->name('product.edit');
+                    Route::post('/edit-{id}', [ProductController::class, 'update'])->name('product.edit');
+                    Route::get('/delete-{id}', [ProductController::class, 'destroy'])->name('product.delete');
+                });
+
+            #Customer
+            Route::group([
+                'namespace' => 'Customer',
+                'prefix' => 'customer',
+            ],
+                function () {
+                    Route::get('/list', [CustomerController::class, 'index'])->name('customer.index');
+                    Route::get('/add', [CustomerController::class, 'create'])->name('customer.add');
+                    Route::post('/add', [CustomerController::class, 'store'])->name('customer.add');
+                    Route::get('/edit-{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+                    Route::post('/edit-{id}', [CustomerController::class, 'update'])->name('customer.edit');
+                    Route::get('/delete-{id}', [CustomerController::class, 'destroy'])->name('customer.delete');
+                });
         });
-});
+    });
