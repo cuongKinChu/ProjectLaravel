@@ -24,7 +24,7 @@ class LoginController extends Controller
         return redirect()->route('login');
     }
 
-    //
+    //Check login
     public  function store(Request $request)
     {
         $this->validate($request,[
