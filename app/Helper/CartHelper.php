@@ -14,19 +14,19 @@ class CartHelper
         $this->items = session('cart') ?  session('cart') : [];
         $this->total_price = $this->get_total_price();
         $this->total_quantity = $this->get_total_quantity();
+
     }
 
-    //Add products to session cart
+    //Thêm vào session cart
     public function create($product,$quantity = 1)
     {
-        $item =[
+        $item = [
             'id' => $product->id,
-            'product_name' => $product -> name,
-            'price' => $product -> price,
+            'product_name' => $product->product_name,
+            'price' => $product->price,
             'image' => $product->image,
-            'quantity' => $quantity
+            'quantity' => $quantity,
         ];
-        //If the product has been added before, the quantity will be increased
         if(isset($this->items[$product->id])){
             $this->items[$product->id]['quantity'] += $quantity;
         }else {
@@ -35,24 +35,49 @@ class CartHelper
         session(['cart'=>$this->items]);
     }
 
+    //Cập nhật giỏ hàng helper
+    public function update($id,$quantity = 1 )
+    {
+        //
+        if(isset($this->items[$id])){
+            $this->items[$id]['quantity'] = $quantity;
+        }
+        session(['cart'=>$this->items]);
+    }
+
+    public function remove($id)
+    {
+        //
+        if(isset($this->items[$id]))
+        {
+            unset($this->items[$id]);
+        }
+        session(['cart'=>$this->items]);
+    }
+
+    public function clear()
+    {
+        //
+        session(['cart'=>'']);
+    }
+
     private function get_total_price()
     {
-        $total_price = 0;
+        $total = 0;
         foreach($this->items as $item){
-            $total_price += $item['price']*$item['quantity'];
+            $total += $item['price']*$item['quantity'];
         }
-        return $total_price;
+        return $total;
         //
     }
 
     private function get_total_quantity()
     {
         //
-        $total_quantity = 0;
+        $total_q = 0;
         foreach($this->items as $item){
-            $total_quantity += $item['quantity'];
+            $total_q += $item['quantity'];
         }
-        return $total_quantity;
+        return $total_q;
     }
 }
-

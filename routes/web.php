@@ -18,7 +18,7 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [HomeController::class, 'index'])->name('homepage');
+Route::get('/', [HomeController::class, 'index'])->name('homepage.index');
 Route::group([
     'namespace' => 'Cart',
     'prefix' => 'cart',
@@ -26,6 +26,9 @@ Route::group([
 ], function () {
     Route::get('add/{id}/{quantity?}', [CartController::class, 'create'])->name('cart.add');
     Route::get('index', [CartController::class, 'index'])->name('cart.index');
+    Route::get('clear',[CartController::class,'clear'])->name('cart.remove');
+    Route::get('remove/{id}',[CartController::class,'remove'])->name('cart.remove');
+    Route::get('update/{id}/{quantity?}',[CartController::class,'update'])->name('cart.update');
 });
 
 

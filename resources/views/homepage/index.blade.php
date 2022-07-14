@@ -18,7 +18,7 @@
                         <div class="box">
                             <div>
                                 <div class="img-box">
-                                    <img src="{{ asset('product-img') }}/{{ $product->image }}" alt="">
+                                    <img src="{{ $product->image }}" alt="">
                                 </div>
                                 <div class="detail-box">
                                     <h5>

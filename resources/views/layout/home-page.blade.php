@@ -62,13 +62,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav  mx-auto ">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('homepage.index') }}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="menu.blade.php">Menu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
                         </li>
                     </ul>
                     <div class="user_option">
@@ -76,7 +73,8 @@
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
                         <a class="cart_link" href="{{ route('cart.index') }}">
-                            <i class="fa-solid fa-cart-shopping text-white"></i>
+                            <i class="fa-solid fa-cart-shopping text-white px-1"></i>
+                            <span class="badge bg-warning text-white ">{{$cart ->total_quantity}}</span>
                         </a>
                         <form class="form-inline">
                             <div class="input-group rounded">
