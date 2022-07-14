@@ -10,6 +10,7 @@
     <!-- Site Metas -->
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
+
     <meta name="author" content=""/>
     <link rel="shortcut icon" href="{{ asset('/homepage/images/favicon.png') }}" type="image/x-icon"/>
 
@@ -41,7 +42,7 @@
 
 <div class="hero_area">
     <div class="bg-box">
-        <img src="homepage/images/milk-tea-bg.jpg" alt="">
+        <img src="{{asset('homepage/images') }}/milk-tea-bg.jpg" alt="">
     </div>
     <!-- header section starts -->
     <header class="header_section">
@@ -52,7 +53,8 @@
               Bubble Tea
             </span>
                 </a>
-                <button class="btn btn-outline-warning" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                <button class="btn btn-outline-warning" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     +
                 </button>
@@ -73,14 +75,14 @@
                         <a href="" class="user_link">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
-                        <a class="cart_link" href="#">
+                        <a class="cart_link" href="{{ route('cart.index') }}">
                             <i class="fa-solid fa-cart-shopping text-white"></i>
                         </a>
                         <form class="form-inline">
                             <div class="input-group rounded">
                                 <input type="search" class="form-control rounded" placeholder="Search"
                                        aria-label="Search" aria-describedby="search-addon"/>
-                                <button  class="input-group-text border-0 bg-warning"  id="search-addon">
+                                <button class="input-group-text border-0 bg-warning" id="search-addon">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -92,89 +94,177 @@
     </header>
     <!-- end header section -->
 
-    @yield('content');
-
-    <!-- footer section -->
-    <footer class="footer_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 footer-col">
-                    <div class="footer_contact">
-                        <h4>
-                            Contact Us
-                        </h4>
-                        <div class="contact_link_box">
-                            <a href="">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <span>
-                  Location
-                </span>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                <span>
-                  Call +01 1234567890
-                </span>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <span>
-                  demo@gmail.com
-                </span>
-                            </a>
+    <!-- slider section -->
+    <section class="slider_section ">
+        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-7 col-lg-6 ">
+                                <div class="detail-box">
+                                    <h1>
+                                        Fast Food Restaurant
+                                    </h1>
+                                    <p>
+                                        Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
+                                        mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore,
+                                        sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                                    </p>
+                                    <div class="btn-box">
+                                        <a href="" class="btn1">
+                                            Order Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 footer-col">
-                    <div class="footer_detail">
-                        <a href="" class="footer-logo">
-                            Bubble Tea
-                        </a>
-                        <p>
-                            Necessary, making this the first true generator on the Internet. It uses a dictionary of
-                            over 200 Latin words, combined with
-                        </p>
+                <div class="carousel-item ">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-7 col-lg-6 ">
+                                <div class="detail-box">
+                                    <h1>
+                                        Fast Food Restaurant
+                                    </h1>
+                                    <p>
+                                        Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
+                                        mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore,
+                                        sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                                    </p>
+                                    <div class="btn-box">
+                                        <a href="" class="btn1">
+                                            Order Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 footer-col">
+                <div class="carousel-item">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-7 col-lg-6 ">
+                                <div class="detail-box">
+                                    <h1>
+                                        Fast Food Restaurant
+                                    </h1>
+                                    <p>
+                                        Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
+                                        mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore,
+                                        sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                                    </p>
+                                    <div class="btn-box">
+                                        <a href="" class="btn1">
+                                            Order Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <ol class="carousel-indicators">
+                    <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+                    <li data-target="#customCarousel1" data-slide-to="1"></li>
+                    <li data-target="#customCarousel1" data-slide-to="2"></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <!-- end slider section -->
+</div>
+
+<!-- food section -->
+
+@yield('content');
+
+<!-- footer section -->
+<footer class="footer_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 footer-col">
+                <div class="footer_contact">
                     <h4>
-                        Opening Hours
+                        Contact Us
                     </h4>
+                    <div class="contact_link_box">
+                        <a href="">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <span>
+                  Location
+                </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <span>
+                  Call +01 1234567890
+                </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <span>
+                  demo@gmail.com
+                </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 footer-col">
+                <div class="footer_detail">
+                    <a href="" class="footer-logo">
+                        Bubble Tea
+                    </a>
                     <p>
-                        Everyday
-                    </p>
-                    <p>
-                        10.00 Am -10.00 Pm
+                        Necessary, making this the first true generator on the Internet. It uses a dictionary of
+                        over 200 Latin words, combined with
                     </p>
                 </div>
             </div>
-            <div class="footer-info">
+            <div class="col-md-4 footer-col">
+                <h4>
+                    Opening Hours
+                </h4>
                 <p>
-                    &copy; <span id="displayYear"></span> All Rights Reserved By
-                    <a href="https://html.design/">Free Html Templates</a>
+                    Everyday
+                </p>
+                <p>
+                    10.00 Am -10.00 Pm
                 </p>
             </div>
         </div>
-    </footer>
-    <!-- footer section -->
+        <div class="footer-info">
+            <p>
+                &copy; <span id="displayYear"></span> All Rights Reserved By
+                <a href="https://html.design/">Free Html Templates</a>
+            </p>
+        </div>
+    </div>
+</footer>
+<!-- footer section -->
 
-    <!-- jQuery -->
-    <script src="{{ asset('homepage/js/jquery-3.4.1.min.js') }}"></script>
-    <!-- popper js -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <!-- bootstrap js -->
-    <script src="{{ asset('homepage/js/bootstrap.js') }}"></script>
-    <!-- owl slider -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-    </script>
-    <!-- isotope js -->
-    <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
-    <!-- nice select -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-    <!-- custom js -->
-    <script src="{{ asset('homepage/js/custom.js') }}"></script>
+<!-- jQuery -->
+<script src="{{ asset('homepage/js/jquery-3.4.1.min.js') }}"></script>
+<!-- popper js -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+</script>
+<!-- bootstrap js -->
+<script src="{{ asset('homepage/js/bootstrap.js') }}"></script>
+<!-- owl slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+</script>
+<!-- isotope js -->
+<script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+<!-- nice select -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+<!-- custom js -->
+<script src="{{ asset('homepage/js/custom.js') }}"></script>
 </div>
 </body>
 

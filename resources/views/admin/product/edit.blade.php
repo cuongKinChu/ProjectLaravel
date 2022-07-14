@@ -40,8 +40,15 @@
 
                                 <div class="form-group">
                                     <label for="inputImg">Image of product</label>
-                                    <input class="form-control" type="file" id="formFile" name="image" >
+                                    <input class="form-control " type="file" id="upload-img" name="image">
+                                    <div id="image_show" class="pt-2">
+                                        <a href="{{ $data->image }}" target="_blank">
+                                            <img src="{{ $data->image }}" width="100px" alt="">
+                                        </a>
+                                    </div>
+                                    <input type="hidden" name="file" id="file" value="{{ $data->image }}">
                                 </div>
+
                                 <div class="form-group">
                                     <label for="summernote">Description</label>
                                     <textarea id="summernote" name="description" class="form-control" placeholder="Input description...">{{$data->description}} </textarea>

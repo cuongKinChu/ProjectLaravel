@@ -45,7 +45,7 @@
                                 <td>
                                     <a>{{ $product->product_name }}</a>
                                 </td>
-                                <td><img src="../../product-img/{{ $product->image }}" style="width: 150px" alt="">
+                                <td><img src="{{ $product->image }}" style="width: 150px" alt="">
                                 </td>
                                 <td class="project_progress">{{ number_format($product->price,0,',','.') }} VND</td>
                                 <td class="project_progress"><?php echo $product->description; ?></td>
