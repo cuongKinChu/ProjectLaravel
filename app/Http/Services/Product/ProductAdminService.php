@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\product;
+namespace App\Http\Services\Product;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Log;
