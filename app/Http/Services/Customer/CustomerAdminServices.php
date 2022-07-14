@@ -18,6 +18,7 @@ class CustomerAdminServices
                 'email' => $request->input('email'),
                 'password' => $request->input('password'),
                 'address' => $request->input('address'),
+                'phone' => $request->input('phone'),
             ]);
             Session::flash('success', 'Add customer successful');
         }catch (\Exception $err){
@@ -39,6 +40,7 @@ class CustomerAdminServices
             $customer->full_name = $request->full_name;
             $customer->email = $request->email;
             $customer->address = $request->address;
+            $customer->phone = $request->phone;
             $customer->save();
             Session::flash('success', 'Update customer successful');
         }catch (\Exception $err){

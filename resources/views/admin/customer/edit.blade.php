@@ -43,6 +43,11 @@
                                     <input type="text" name="address" id="inputAddress" class="form-control"
                                            placeholder="Input your address"  value="{{ $data->address  }}">
                                 </div>
+                                <div class="form-group">
+                                    <label for="inputPhone">Phone</label>
+                                    <input type="text" name="phone" id="inputPhone" class="form-control"
+                                           placeholder="Input your phone" value="{{ $data->phone  }}">
+                                </div>
                                 @include('admin.alert')
                             </div>
                         </div>

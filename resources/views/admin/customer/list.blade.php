@@ -33,6 +33,7 @@
                             <th style="width: 20%">Full Name</th>
                             <th style="width: 20%">Email</th>
                             <th style="width: 13%">Address</th>
+                            <th style="width: 13%">Phone</th>
                             <th style="width: 10%">Action</th>
                         </tr>
                         </thead>
@@ -43,6 +44,7 @@
                                 <td class="project_progress">{{ $customer->full_name }}</td>
                                 <td class="project_progress">{{ $customer->email }}</td>
                                 <td class="project_progress">{{ $customer->address }}</td>
+                                <td class="project_progress">{{ $customer->phone }}</td>
                                 <td class="project-actions ">
                                     <a class="btn btn-info btn-sm" href="{{ route('customer.edit',['id'=>$customer->id]) }}">
                                         <i class="fas fa-pencil-alt"></i>
