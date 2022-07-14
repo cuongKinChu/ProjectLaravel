@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
-use App\Http\Services\product\ProductAdminService;
+use App\Http\Services\Product\ProductAdminService;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -67,7 +67,7 @@ class ProductController extends Controller
     //Update the specified resource in storage.
     public function update(ProductRequest $request, $id)
     {
-        $this->productServices->update($request,$id);;
+        $this->productServices->update($request,$id);
         return redirect()->route('product.index');
     }
 

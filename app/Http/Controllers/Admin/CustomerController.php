@@ -3,12 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Customer\CustomerRequest;
+use App\Http\Services\Customer\CustomerAdminServices;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
+    protected $customerServices;
+
+    /**
+     * @param $customerServices
+     */
+    public function __construct(CustomerAdminServices $customerServices)
+    {
+        $this->customerServices = $customerServices;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -41,17 +54,9 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
-        $data = $this->validate($request,[
-            'full_name' => 'required',
-            'email' => 'required|email:filter|unique:customers,email',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password',
-            'address' => 'required'
-        ]);
-        Customer::saveCustomer($data['full_name'],$data['email'], $data['password'],$data['address']);
+        $this->customerServices->insert($request);
         return redirect()->route('customer.index');
     }
 
@@ -90,15 +95,8 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        //
-        $data = $this->validate($request,[
-            'full_name' => 'required',
-            'email' => 'required|email:filter',
-            'address' => 'required'
-        ]);
-        Customer::updateCustomer($id,$data['full_name'],$data['email'],$data['address']);
-        Session::flash('success', 'Update customer successful');
+
+        $this->customerServices->update($request,$id);
         return redirect()->route('customer.index');
     }
 
@@ -110,14 +108,7 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        if (Customer::find($id)){
-            Customer::find($id)->delete();
-            Session::flash('success', 'Delete customer successful');
-            return redirect()->back();
-        }
-        else{
-            Session::flash('error', 'Delete customer error');
-            return redirect()->route('customer.index');
-        }
+        $this->customerServices->remove($id);
+        return redirect()->route('customer.index');
     }
 }
