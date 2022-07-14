@@ -1,8 +1,5 @@
 @extends('layout.home-page')
 @section('content')
-
-
-
     <section class="food_section layout_padding-bottom">
         <div class="container">
             <div class="heading_container heading_center pt-5">
@@ -44,6 +41,5 @@
             </div>
         </div>
     </section>
-
     <!-- end food section -->
 @endsection

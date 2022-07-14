@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\CartHelper;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -26,6 +27,7 @@ class CartController extends Controller
     //Xóa khỏi giỏ hàng
     public function remove(CartHelper $cart,$id){
         $cart->remove($id);
+        Session::flash('success','Delete product successful');
         return redirect()->back();
     }
 
@@ -33,6 +35,7 @@ class CartController extends Controller
     public function update(CartHelper $cart,$id){
         $quantity = request()->quantity ? request()->quantity : 1;
         $cart->update($id,$quantity);
+        Session::flash('success','Update cart successful');
         return redirect()->back();
     }
 

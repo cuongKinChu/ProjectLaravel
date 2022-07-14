@@ -12,9 +12,12 @@
             <!-- /container -->
         </div>
         <!-- /BREADCRUMB -->
-        <div class="row">
-            <div class ="col-8">
-                <div class="container">
+
+        <div class="container">
+            @include('admin.alert')
+            <div class="row">
+
+                <div class="col-8">
                     <table id="cart" class="table table-hover table-condensed">
                         <thead>
                         <tr>
@@ -27,7 +30,6 @@
                             <th style="width:10%">Action</th>
                         </tr>
                         </thead>
-
                         @if($cart ->total_price > 0)
                             <tbody>
                             <?php $n = 1; ?>
@@ -35,27 +37,29 @@
                                 <tr>
                                     <td>{{$n}}</td>
                                     <td data-th="Image">
-                                        <div class="col-sm-2 hidden-xs"><img src="{{ $item['image'] }}" style="width: 100px"
+                                        <div class="col-sm-2 hidden-xs"><img src="{{ $item['image'] }}"
+                                                                             style="width: 100px"
                                                                              alt="">
                                         </div>
                                     </td>
                                     <td data-th="Product">{{ $item['product_name'] }} </td>
-                                    <td data-th="Price">{{ number_format($item['price'],0,',','.') }} VND</td>
+                                    <td data-th="Price">{{ number_format($item['price'],0,',','.') }}</td>
                                     <td data-th="Quantity">
-                                        <form action="{{ route('cart.update',['id' => $item['id']]) }}" method="get">
+                                        <form action="{{ route('cart.update',['id' => $item['id']]) }}"
+                                              method="get">
                                             <input type="number" name="quantity" class="form-control"
                                                    value="{{ $item['quantity'] }}">
                                     </td>
 
                                     <td data-th="chanties">{{ number_format($item['price']*$item['quantity'],0,',','.') }}
-                                        VND
                                     </td>
                                     <td class="actions" data-th="">
                                         <button type="sumbit" value="Update" class="btn  btn-info btn-sm"><i
                                                     class="fas fa-pencil-alt text-white"></i></button>
                                         </form>
                                         <a href="{{ route('cart.remove',['id' => $item['id']]) }}">
-                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                                            </button>
                                         </a>
                                     </td>
                                 </tr>
@@ -69,23 +73,52 @@
                         @endif
                         <tfoot>
                         <tr>
-                            <td></td>
-                            <td colspan="2"><a href="{{ route('homepage.index') }}" class="btn btn-warning"><i
-                                            class="fa fa-angle-left"></i> Mua tiếp</a>
+                            <td colspan="3"><a href="{{ route('homepage.index') }}" class="btn btn-warning"><i
+                                            class="fa fa-angle-left"></i> Buy More</a>
                             </td>
-                            <td colspan="2" class="hidden-xs text-center">Total:
+                            <td colspan="4" class="hidden-xs text-center">Total:
                                 <strong>{{number_format($cart ->total_price,0,',','.')}} VND</strong>
                             </td>
-                            {{--                    <td colspan="2"><a href="{{ route('checkout') }}" class="btn btn-success btn-block">Thanh toán <i--}}
-                            {{--                                    class="fa fa-angle-right"></i></a>--}}
-                            {{--                    </td>--}}
                         </tr>
                         </tfoot>
                     </table>
                 </div>
-            </div>
-            <div class="col"></div>
-        </div>
+                <div class="col-4 ">
+                    <div class="row border border-secondary">
+                        <div class="mb-3 pt-2 px-3">
+                            <h3 class="title"><strong>Check out</strong></h3>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="name" class="form-label">Customer Name</label>
+                            <input class="form-control" type="text" id="name" name="first-name"
+                                   placeholder="Your Name"
+                                   value="">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input class="form-control" type="email" id="email" name="email"
+                                   placeholder="exam@email.com" value="">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input class="form-control" type="text" name="address" placeholder="Your Address"
+                                   value="">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="phone" class="form-label">Phone number</label>
+                            <input class="form-control" type="tel" name="phone" placeholder="Telephone" value="">
+                        </div>
+                        <div class="d-grid gap-2 col-4 mx-auto pb-2">
+                            @if($cart ->total_price == 0)
+                                <button type="submit" class="btn btn-primary order-submit "  disabled>Order</button>
+                            @else
+                                <button type="submit" class="btn btn-primary order-submit">Order</button>
+                            @endif
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
