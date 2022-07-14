@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name="_token" content="{{ csrf_token() }}">
     <title>{{$title}}</title>
 
     <!-- Custom fonts for this template-->
@@ -240,7 +240,8 @@
     </div>
 </div>
 <!-- Bootstrap core JavaScript-->
-<script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('admin/js/main.js') }}"></script>
 <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 <!-- Core plugin JavaScript-->
@@ -249,6 +250,7 @@
 <!-- Custom scripts for all pages-->
 <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
 <script src="{{ asset('summer-note/summernote.min.js') }}"></script>
+
 
 <!-- Summernote -->
 <script>

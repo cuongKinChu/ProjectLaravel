@@ -3,13 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\ProductRequest;
+use App\Http\Services\product\ProductAdminService;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
+    protected $productServices;
+
+
     //Display a listing of the resource.
+
+    /**
+     * @param $productServices
+     */
+    public function __construct(ProductAdminService $productServices)
+    {
+        $this->productServices = $productServices;
+    }
+
     public function index()
     {
         $product = Product::orderby('id', 'DESC')->paginate(5);
@@ -28,18 +42,9 @@ class ProductController extends Controller
     }
 
     //Store a newly created resource in storage.
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $data = $this->validate($request, [
-            'product_name' => 'required',
-            'price' => 'required|min:0|not_in:0',
-            'description' => 'required',
-        ]);
-        $image_name = $this->uploadImage($request);
-
-        Product::saveProduct($data['product_name'],$image_name, $data['price'],$data['description']);
-
-        Session::flash('success', 'Add product successful');
+        $this->productServices->insert($request);
         return redirect()->route('product.index');
     }
 
@@ -60,52 +65,16 @@ class ProductController extends Controller
     }
 
     //Update the specified resource in storage.
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        $data = $this->validate($request, [
-            'product_name' => 'required',
-            'price' => 'required|min:0|not_in:0',
-            'description' => 'required',
-        ]);
-        //Image will be handled by function uploadImage
-        $image_name = $this->uploadImage($request);
-
-        Product::updateProduct($id,$data['product_name'],$image_name, $data['price'],$data['description']);
-        Session::flash('success', 'Update product successful');
+        $this->productServices->update($request,$id);;
         return redirect()->route('product.index');
     }
 
     //Remove the specified resource from storage.
     public function destroy($id)
     {
-        if (Product::find($id)){
-            Product::find($id)->delete();
-            Session::flash('success', 'Delete product successful');
-            return redirect()->back();
-        }
-        else{
-            Session::flash('error', 'Delete product error');
-            return redirect()->route('product.index');
-        }
+        $this->productServices->remove($id);
+        return redirect()->route('product.index');
     }
-
-    //Upload Image
-    public function uploadImage($image_path)
-    {
-        //Check if the user has uploaded the file
-        if (!$image_path->hasFile('image')) {
-            // If not, print out the message
-            Session::flash('error', 'Please select the file you want to upload');
-            return redirect()->back();
-        }
-        $image_path->validate([
-            'image' => 'mimes:jpg,bmg,png'
-        ]);
-        // If yes, then store the file in public/images
-        $image = $image_path->file('image');
-        $storedPath = $image->move('product-img', $image->getClientOriginalName());
-        // Returns the value of the image name
-        return $image_name = $image->getClientOriginalName();
-    }
-
 }
