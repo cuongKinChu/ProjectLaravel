@@ -47,7 +47,7 @@
                                     <td data-th="Quantity">
                                         <form action="{{ route('cart.update',['id' => $item['id']]) }}"
                                               method="get">
-                                            <input type="number" name="quantity" class="form-control"
+                                            <input type="number" name="quantity" class="form-control" min="1"
                                                    value="{{ $item['quantity'] }}">
                                     </td>
 
