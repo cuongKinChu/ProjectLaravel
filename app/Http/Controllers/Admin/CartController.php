@@ -30,7 +30,7 @@ class CartController extends Controller
 
     public function show($id)
     {
-        $customer = Customer::where('id',$id)->get();
+        $customer = Customer::find($id);
         return view('admin.cart.detail',[
            'title' => 'Order detail: ' . $customer->full_name,
             'customer' => $customer,
