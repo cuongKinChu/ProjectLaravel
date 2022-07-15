@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\CartController;
+
 use App\Http\Controllers\HomeController;
 
 /*
@@ -24,11 +24,11 @@ Route::group([
     'prefix' => 'cart',
     'name' => 'cart.',
 ], function () {
-    Route::get('add/{id}/{quantity?}', [CartController::class, 'create'])->name('cart.add');
-    Route::get('index', [CartController::class, 'index'])->name('cart.index');
-    Route::get('clear',[CartController::class,'clear'])->name('cart.remove');
-    Route::get('remove/{id}',[CartController::class,'remove'])->name('cart.remove');
-    Route::get('update/{id}/{quantity?}',[CartController::class,'update'])->name('cart.update');
+    Route::get('add/{id}/{quantity?}', [\App\Http\Controllers\CartController::class, 'create'])->name('cart.add');
+    Route::get('index', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+    Route::get('remove/{id}',[\App\Http\Controllers\CartController::class,'remove'])->name('cart.remove');
+    Route::get('update/{id}/{quantity?}',[\App\Http\Controllers\CartController::class,'update'])->name('cart.update');
+    Route::post('index',[\App\Http\Controllers\CartController::class,'checkout'])->name('cart.index');
 });
 
 
@@ -54,18 +54,12 @@ Route::middleware(['auth'])->group(function () {
         #Upload
         Route::post('/upload/services', [\App\Http\Controllers\Admin\UploadController::class, 'store']);
 
-        #Customer
-        Route::group([
-            'namespace' => 'Customer',
-            'prefix' => 'customer',
-        ],
-            function () {
-                Route::get('/list', [CustomerController::class, 'index'])->name('customer.index');
-                Route::get('/add', [CustomerController::class, 'create'])->name('customer.add');
-                Route::post('/add', [CustomerController::class, 'store'])->name('customer.add');
-                Route::get('/edit-{id}', [CustomerController::class, 'edit'])->name('customer.edit');
-                Route::post('/edit-{id}', [CustomerController::class, 'update'])->name('customer.edit');
-                Route::get('/delete-{id}', [CustomerController::class, 'destroy'])->name('customer.delete');
-            });
+        #Cart
+        Route::group(['prefix' => 'customers',], function () {
+            Route::get('/', [\App\Http\Controllers\Admin\CartController::class, 'index'])->name('customers.index');
+            Route::get('/view/{id}', [\App\Http\Controllers\Admin\CartController::class, 'show'])->name('customers.show');
+            Route::get('/delete/{id}', [\App\Http\Controllers\Admin\CartController::class, 'destroy'])->name('customers.delete');
+
+        });
     });
 });

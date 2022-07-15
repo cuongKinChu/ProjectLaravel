@@ -78,25 +78,24 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fa-solid fa-face-smile"></i>
-                <span>Customers</span>
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Cart</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="{{ route('customer.index') }}">List Accounts</a>
-                    <a class="collapse-item" href="{{ route('customer.add') }}">Add Accounts</a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Cart Utilities:</h6>
+                        <a class="collapse-item" href="{{route('customers.index')}}">List Order</a>
+                    </div>
                 </div>
-            </div>
         </li>
 
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Bills</span></a>
-        </li>
+{{--        <!-- Nav Item - Tables -->--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link" href="">--}}
+{{--                <i class="fas fa-fw fa-table"></i>--}}
+{{--                <span>Bills</span></a>--}}
+{{--        </li>--}}
 
         <!-- Divider -->
         <hr class="sidebar-divider">

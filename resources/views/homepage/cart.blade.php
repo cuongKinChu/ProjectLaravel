@@ -84,13 +84,15 @@
                     </table>
                 </div>
                 <div class="col-4 ">
+                    <form method="POST" action="">
+                        @csrf
                     <div class="row border border-secondary">
                         <div class="mb-3 pt-2 px-3">
                             <h3 class="title"><strong>Check out</strong></h3>
                         </div>
                         <div class="col-12 mb-3">
                             <label for="name" class="form-label">Customer Name</label>
-                            <input class="form-control" type="text" id="name" name="first-name"
+                            <input class="form-control" type="text" id="name" name="full_name"
                                    placeholder="Your Name"
                                    value="">
                         </div>
@@ -106,7 +108,11 @@
                         </div>
                         <div class="col-12 mb-3">
                             <label for="phone" class="form-label">Phone number</label>
-                            <input class="form-control" type="tel" name="phone" placeholder="Telephone" value="">
+                            <input class="form-control" type="text" name="phone" placeholder="Telephone" value="">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <input class="form-control" type="text" name="content" placeholder="Telephone" value="">
                         </div>
                         <div class="d-grid gap-2 col-4 mx-auto pb-2">
                             @if($cart ->total_price == 0)
@@ -115,8 +121,8 @@
                                 <button type="submit" class="btn btn-primary order-submit">Order</button>
                             @endif
                         </div>
-
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

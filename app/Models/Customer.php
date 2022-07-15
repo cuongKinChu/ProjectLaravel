@@ -7,9 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    protected $table = 'customers';
-    protected $fillable = ['full_name','email','password','address','phone'];
-    public $timestamp = false;
     use HasFactory;
+    protected $table = 'customers';
+    protected $fillable = ['full_name','email','address','phone','content'];
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class,'customer_id','id');
+    }
+
+
 
 }
