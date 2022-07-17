@@ -1,12 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\MainController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\CustomerController;
 
-use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,48 +14,76 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [HomeController::class, 'index'])->name('homepage.index');
-Route::group([
-    'namespace' => 'Cart',
-    'prefix' => 'cart',
-    'name' => 'cart.',
-], function () {
-    Route::get('add/{id}/{quantity?}', [\App\Http\Controllers\CartController::class, 'create'])->name('cart.add');
-    Route::get('index', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
-    Route::get('remove/{id}',[\App\Http\Controllers\CartController::class,'remove'])->name('cart.remove');
-    Route::get('update/{id}/{quantity?}',[\App\Http\Controllers\CartController::class,'update'])->name('cart.update');
-    Route::post('index',[\App\Http\Controllers\CartController::class,'checkout'])->name('cart.index');
-});
 
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    #Home page
+    Route::get('/', 'HomeController@index')->name('homepage.index');
 
-//Admin
-Route::get('admin/login', [LoginController::class, 'index'])->name('login');
-Route::post('admin/login', [LoginController::class, 'store'])->name('login');
-
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('admin')->group(function (){
-        Route::get('/dashboard', [MainController::class, 'index'])->name('dashboard');
-        Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
-        #Product
-        Route::group(['prefix' => 'product',], function () {
-            Route::get('/list', [ProductController::class, 'index'])->name('product.index');
-            Route::get('/add', [ProductController::class, 'create'])->name('product.add');
-            Route::post('/add', [ProductController::class, 'store'])->name('product.add');
-            Route::get('/edit-{id}', [ProductController::class, 'edit'])->name('product.edit');
-            Route::post('/edit-{id}', [ProductController::class, 'update'])->name('product.edit');
-            Route::get('/delete-{id}', [ProductController::class, 'destroy'])->name('product.delete');
-        });
-
-        #Upload
-        Route::post('/upload/services', [\App\Http\Controllers\Admin\UploadController::class, 'store']);
-
-        #Cart
-        Route::group(['prefix' => 'customers',], function () {
-            Route::get('/', [\App\Http\Controllers\Admin\CartController::class, 'index'])->name('customers.index');
-            Route::get('/view/{id}', [\App\Http\Controllers\Admin\CartController::class, 'show'])->name('customers.show');
-            Route::get('/delete/{id}', [\App\Http\Controllers\Admin\CartController::class, 'destroy'])->name('customers.delete');
-
-        });
+    #Cart
+    Route::group([
+        'prefix' => 'cart',
+        'name' => 'cart.',
+    ], function () {
+        Route::get('add/{id}/{quantity?}', 'CartController@create')->name('cart.add');
+        Route::get('index', 'CartController@index')->name('cart.index');
+        Route::get('remove/{id}', 'CartController@remove')->name('cart.remove');
+        Route::get('update/{id}/{quantity?}', 'CartController@update')->name('cart.update');
+        Route::post('index', 'CartController@checkout')->name('cart.index');
     });
+
+    #Login Admin
+    Route::group(
+        [
+            'namespace' => 'Admin', //Đường dẫn có dạng App\Http\Controllers\Admin
+            'prefix' => 'admin', //Là tên đường dẫn trên trang web
+        ],function () {
+        Route::get('login', 'LoginController@index')->name('login');
+        Route::post('login', 'LoginController@store')->name('login');
+    });
+
+    #Function Admin
+    Route::group(
+        [
+            'namespace' => 'Admin', //Đường dẫn có dạng App\Http\Controllers\Admin
+            'prefix' => 'admin', //Là tên đường dẫn trên trang web
+            'as' => 'admin.', //Tên thay thế admin.index,admin.product...
+            'middleware' => ['auth']
+        ],
+        function () {
+            Route::get('/dashboard', 'MainController@index')->name('dashboard');
+            Route::get('/logout', 'LoginController@logout')->name('logout');
+
+            #Product
+            Route::group([
+                'prefix' => 'product',
+                'as' => 'product.',
+            ], function () {
+                Route::get('/list', 'ProductController@index')->name('index');
+                Route::get('/add', 'ProductController@create')->name('add');
+                Route::post('/add', 'ProductController@store')->name('add');
+                Route::get('/edit-{id}', 'ProductController@edit')->name('edit');
+                Route::post('/edit-{id}', 'ProductController@update')->name('edit');
+                Route::get('/delete-{id}', 'ProductController@destroy')->name('delete');
+            });
+
+            #Upload
+            Route::post('/upload/services', 'UploadController@store');
+
+            #Order
+            Route::group([
+                'prefix' => 'customers',
+                'as' => 'customers.',
+            ], function () {
+                Route::get('/', 'CartController@index')->name('index');
+                Route::get('/view/{id}', 'CartController@show')->name('show');
+                Route::get('/delete/{id}', 'CartController@destroy')->name('delete');
+            });
+        }
+    );
 });
+
+
+
+
+
+

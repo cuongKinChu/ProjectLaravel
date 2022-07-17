@@ -45,7 +45,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $this->productServices->insert($request);
-        return redirect()->route('product.index');
+        return redirect()->route('admin.product.index');
     }
 
     //Display the specified resource.
@@ -68,13 +68,13 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         $this->productServices->update($request,$id);
-        return redirect()->route('product.index');
+        return redirect()->route('admin.product.index');
     }
 
     //Remove the specified resource from storage.
     public function destroy($id)
     {
         $this->productServices->remove($id);
-        return redirect()->route('product.index');
+        return redirect()->route('admin.product.index');
     }
 }

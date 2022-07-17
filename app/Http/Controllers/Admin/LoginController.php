@@ -36,7 +36,7 @@ class LoginController extends Controller
             'email'=> $request ->input('email'),
             'password'=> $request ->input('password')
             ], $request->input('remember'))) {
-            return redirect()->route('dashboard');
+            return redirect()->route('admin.dashboard');
         }
         Session::flash('error','Email or Password is wrong');
         return redirect()->back();

@@ -50,11 +50,11 @@
                                 <td class="project_progress"><?php echo $product->description; ?></td>
                                 <td class="project-actions ">
                                     <a class="btn btn-info btn-sm"
-                                       href="{{ route('product.edit',['id'=>$product->id]) }}">
+                                       href="{{ route('admin.product.edit',['id'=>$product->id]) }}">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                     <a class="btn btn-danger btn-sm"
-                                       href="{{ route('product.delete',['id'=>$product->id]) }}"
+                                       href="{{ route('admin.product.delete',['id'=>$product->id]) }}"
                                        onclick="return confirm('Are you sure to delete?')">
                                         <i class="fas fa-trash"></i>
                                     </a>

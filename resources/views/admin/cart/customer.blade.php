@@ -46,11 +46,11 @@
                                 <td class="project_progress">{{ $customer->phone }}</td>
                                 <td class="project_progress">{{ $customer->created_at }}</td>
                                 <td class="project-actions ">
-                                    <a class="btn btn-info btn-sm" href="{{ route('customers.show',['id'=>$customer->id]) }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route('admin.customers.show',['id'=>$customer->id]) }}">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                     <a class="btn btn-danger btn-sm"
-                                       href="{{ route('customers.delete',['id'=>$customer->id]) }}"
+                                       href="{{ route('admin.customers.delete',['id'=>$customer->id]) }}"
                                        onclick="return confirm('Are you sure to delete?')">
                                         <i class="fas fa-trash"></i>
                                     </a>

@@ -33,7 +33,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -45,7 +45,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+            <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -68,8 +68,8 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{ route('product.index') }}">List Products</a>
-                    <a class="collapse-item" href="{{ route('product.add') }}">Add Product</a>
+                    <a class="collapse-item" href="{{ route('admin.product.index') }}">List Products</a>
+                    <a class="collapse-item" href="{{ route('admin.product.add') }}">Add Product</a>
                 </div>
             </div>
         </li>
@@ -85,7 +85,7 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Cart Utilities:</h6>
-                        <a class="collapse-item" href="{{route('customers.index')}}">List Order</a>
+                        <a class="collapse-item" href="{{route('admin.customers.index')}}">List Order</a>
                     </div>
                 </div>
         </li>
@@ -233,7 +233,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+                <a class="btn btn-primary" href="{{ route('admin.logout') }}">Logout</a>
             </div>
         </div>
     </div>

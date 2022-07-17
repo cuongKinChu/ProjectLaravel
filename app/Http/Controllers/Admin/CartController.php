@@ -41,6 +41,6 @@ class CartController extends Controller
     public function destroy($id)
     {
         $this->cart->destroyCustomer($id);
-        return redirect()->route('customers.index');
+        return redirect()->route('admin.customers.index');
     }
 }

@@ -63,7 +63,7 @@
                 </div>
                 <div class="row p-1">
                     <div class="col-12">
-                        <a href="{{ route('product.index') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ route('admin.product.index') }}" class="btn btn-secondary">Cancel</a>
                         <input type="submit" value="Create new product" class="btn btn-success float-right">
                     </div>
                 </div>

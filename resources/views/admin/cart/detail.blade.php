@@ -74,7 +74,7 @@
                     </table>
                     <div class="row p-1">
                         <div class="col-12">
-                            <a href="{{ route('customers.index') }}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{ route('admin.customers.index') }}" class="btn btn-secondary">Cancel</a>
                             <p class=" float-right"><strong>Total:</strong> {{ number_format($total,0,',','.') }} VND</p>
                         </div>
                     </div>
