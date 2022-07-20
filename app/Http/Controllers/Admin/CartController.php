@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Cart\CartService;
 use App\Models\Customer;
-use Illuminate\Http\Request;
+use App\Services\Cart\CartService;
 
 class CartController extends Controller
 {

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\UploadServices;
+use App\Services\UploadServices;
 use Illuminate\Http\Request;
-
 
 
 class UploadController extends Controller
@@ -13,9 +12,6 @@ class UploadController extends Controller
     //
     protected $upload;
 
-    /**
-     * @param $upload
-     */
     public function __construct(UploadServices $upload)
     {
         $this->upload = $upload;

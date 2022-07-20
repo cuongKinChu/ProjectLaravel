@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Http\Services\Cart\CartService;
+use App\Services\Cart\CartService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 

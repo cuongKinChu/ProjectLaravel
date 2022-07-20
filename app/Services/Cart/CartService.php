@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Services\Cart;
+namespace App\Services\Cart;
 
 use App\Models\Cart;
 use App\Models\Customer;
-use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class CartService

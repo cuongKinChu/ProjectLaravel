@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,20 +14,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
-    #Home page
-    Route::get('/', 'HomeController@index')->name('homepage.index');
+    Route::group(
+        [
+            'namespace' => 'HomePage',
+        ],
+        function () {
+            #Home page
+            Route::get('/', 'HomeController@index')->name('homepage.index');
 
-    #Cart
-    Route::group([
-        'prefix' => 'cart',
-        'name' => 'cart.',
-    ], function () {
-        Route::get('add/{id}/{quantity?}', 'CartController@create')->name('cart.add');
-        Route::get('index', 'CartController@index')->name('cart.index');
-        Route::get('remove/{id}', 'CartController@remove')->name('cart.remove');
-        Route::get('update/{id}/{quantity?}', 'CartController@update')->name('cart.update');
-        Route::post('index', 'CartController@checkout')->name('cart.index');
-    });
+            #Cart
+            Route::group([
+                'prefix' => 'cart',
+                'name' => 'cart.',
+            ], function () {
+                Route::get('add/{id}/{quantity?}', 'CartController@create')->name('cart.add');
+                Route::get('index', 'CartController@index')->name('cart.index');
+                Route::get('remove/{id}', 'CartController@remove')->name('cart.remove');
+                Route::get('update/{id}/{quantity?}', 'CartController@update')->name('cart.update');
+                Route::post('index', 'CartController@checkout')->name('cart.index');
+            });
+        });
+
 
     #Login Admin
     Route::group(
@@ -61,8 +66,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::get('/list', 'ProductController@index')->name('index');
                 Route::get('/add', 'ProductController@create')->name('add');
                 Route::post('/add', 'ProductController@store')->name('add');
-                Route::get('/edit-{id}', 'ProductController@edit')->name('edit');
-                Route::post('/edit-{id}', 'ProductController@update')->name('edit');
+                Route::get('/update-{id}', 'ProductController@edit')->name('edit');
+                Route::post('/update-{id}', 'ProductController@update')->name('edit');
                 Route::get('/delete-{id}', 'ProductController@destroy')->name('delete');
             });
 

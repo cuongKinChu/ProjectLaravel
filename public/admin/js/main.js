@@ -16,7 +16,7 @@ $('#upload-img').change(function (){
         type: 'POST',
         dataType: 'JSON',
         data: form,
-        url: '/admin/upload/services',
+        url: '/public/admin/upload/services',
         success: function (results) {
             if (results.error === false)
             {

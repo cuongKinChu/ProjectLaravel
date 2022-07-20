@@ -4,29 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
-use App\Http\Services\Product\ProductAdminService;
-use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Services\Product\ProductAdminService;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+
 
 class ProductController extends Controller
 {
-    protected $productServices;
-
-
-    //Display a listing of the resource.
+    private $productAdminService;
 
     /**
-     * @param $productServices
+     * @param $productAdminService
      */
-    public function __construct(ProductAdminService $productServices)
+    public function __construct(ProductAdminService $productAdminService)
     {
-        $this->productServices = $productServices;
+        $this->productAdminService = $productAdminService;
     }
 
     public function index()
     {
-        $product = Product::orderby('id', 'DESC')->paginate(5);
+        $product = $this->productAdminService->getAllProduct();
         return view('admin.product.list', [
             'data' => $product,
             'title' => 'List products'
@@ -44,8 +41,17 @@ class ProductController extends Controller
     //Store a newly created resource in storage.
     public function store(ProductRequest $request)
     {
-        $this->productServices->insert($request);
-        return redirect()->route('admin.product.index');
+        try {
+            $this->productAdminService->insert($request);
+
+            Session::flash('success', 'Add product successful');
+            return redirect()->route('admin.product.index');
+        } catch (\Exception $err) {
+            Session::flash('error', 'Add product fail');
+            Log::info($err->getMessage());
+            return redirect()->route('admin.product.add');
+        }
+
     }
 
     //Display the specified resource.
@@ -57,7 +63,7 @@ class ProductController extends Controller
     //Show the form for editing the specified resource.
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = $this->productAdminService->findById($id);
         return view('admin.product.edit', [
             'data' => $product,
             'title' => 'Edit products'
@@ -67,14 +73,21 @@ class ProductController extends Controller
     //Update the specified resource in storage.
     public function update(ProductRequest $request, $id)
     {
-        $this->productServices->update($request,$id);
-        return redirect()->route('admin.product.index');
+        try {
+            $this->productAdminService->update($request, $id);
+            Session::flash('success', 'Update product successful');
+            return redirect()->route('admin.product.index');
+        } catch (\Exception $err) {
+            Session::flash('error', 'Update product fail');
+            Log::info($err->getMessage());
+            return redirect()->back();
+        }
     }
 
     //Remove the specified resource from storage.
     public function destroy($id)
     {
-        $this->productServices->remove($id);
+        $this->productAdminService->deleteById($id);
         return redirect()->route('admin.product.index');
     }
 }

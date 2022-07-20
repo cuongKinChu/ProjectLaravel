@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\HomePage;
 
 use App\Helper\CartHelper;
-use App\Http\Services\Cart\CartService;
+use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Services\Cart\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     protected $cartServices;
-
-    //Show your cart:
 
     /**
      * @param $cartServices
@@ -22,6 +21,7 @@ class CartController extends Controller
         $this->cartServices = $cartServices;
     }
 
+    //Show your cart:
     public function index(){
         return view('homepage.cart');
     }
@@ -31,7 +31,6 @@ class CartController extends Controller
     {
         $quantity = request()->quantity ? request()->quantity : 1;
         $product = Product::find($id);
-
         $cart->create($product,$quantity);
         return redirect()->route('cart.index');
     }
@@ -46,6 +45,11 @@ class CartController extends Controller
     //Update cart
     public function update(CartService $cart,$id){
         $quantity = request()->quantity ? request()->quantity : 1;
+        if($quantity < 1)
+        {
+            Session::flash('error','Update cart unsuccessful');
+            return redirect()->route('cart.index');
+        }
         $cart->update($id,$quantity);
         Session::flash('success','Update cart successful');
         return redirect()->back();

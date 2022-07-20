@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Services;
 
 class UploadServices
 {
@@ -15,7 +15,7 @@ class UploadServices
                 $request->file('file')->storeAs(
                     'public/' . $pathFull, $name
                 );
-                return '/storage/' . $pathFull . '/' . $name;
+                return '/public/storage/' . $pathFull . '/' . $name;
             } catch (\Exception $error) {
                 return false;
             }
