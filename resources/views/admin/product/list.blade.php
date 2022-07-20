@@ -29,12 +29,12 @@
                     <table class="table table-striped projects">
                         <thead>
                         <tr>
-                            <th style="width: 5%">ID</th>
-                            <th style="width: 20%">Name</th>
-                            <th style="width: 20%">Image</th>
-                            <th style="width: 13%">Price</th>
-                            <th style="width: 25%">Description</th>
-                            <th style="width: 10%">Action</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>

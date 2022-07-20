@@ -4,9 +4,6 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Product;
 use App\Repositories\ProductRepositoryInterface;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Session;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface
 {
@@ -15,38 +12,33 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         parent::__construct($model);
     }
 
+    //Lấy tất cả sản phẩm có phân trang mỗi trang 6sp
     public function getAll()
     {
-        return $this->model->orderby('id', 'DESC')->paginate(5);
+        return $this->model->orderby('id', 'DESC')->paginate(6);
     }
 
+    //Lấy thông tin 1 sản phẩm
+    public function find($id)
+    {
+        return $this->model->newModelQuery()->findOrFail($id);
+    }
+
+    //Thêm sản phẩm
     public function create($request)
     {
-        $product = $this->model->newModelQuery();
-         return $product->save();
+        return $this->model->newModelQuery()->create($request);
     }
 
-    public function findById($id)
+    //Cập nhật sản phẩm
+    public function update($id, $request)
     {
-            $product = $this->productRepository->where('id', $id)->firstOrFail();
-            return $product;
+        return $this->find($id)->update($request);
     }
 
-    public function update($request,$id)
-    {
-        $request->except('_token');
-        $product = $this->productRepository->find($id);
-        $product->product_name = $request->product_name;
-        $product->image = $request->file;
-        $product->price = $request->price;
-        $product->description = $request->description;
-        return $product->save();
-    }
-
+    //Xoá sản phẩm
     public function delete($id)
     {
-        $product = $this->findById($id);
-        return $product->delete();
-
+        return $this->find($id)->delete();
     }
 }

@@ -11,7 +11,7 @@ interface ProductRepositoryInterface
     public function create($request);
 
     //Hiển thị thông tin product
-    public function findById($id);
+    public function find($id);
 
     //Sửa product
     public function update($request,$id);

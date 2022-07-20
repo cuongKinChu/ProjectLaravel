@@ -53,6 +53,7 @@
                                     <label for="summernote">Description</label>
                                     <textarea id="summernote" name="description" class="form-control" placeholder="Input description...">{{$data->description}} </textarea>
                                 </div>
+                                @include('admin.alert')
                             </div>
                         </div>
                         <!-- /.card-body -->

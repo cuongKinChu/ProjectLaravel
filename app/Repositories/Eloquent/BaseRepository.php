@@ -14,31 +14,43 @@ class BaseRepository
         $this->model = $model;
     }
 
+    /**
+     * @return Model
+     */
     public function getModel(): Model
     {
         return $this->model;
     }
 
+    /**
+     * @param Model $model
+     */
+    public function setModel(Model $model): void
+    {
+        $this->model = $model;
+    }
 
-    public function findById($id)
+    //Tìm kiếm
+    public function find($id)
     {
         return $this->model->newModelQuery()->find($id);
     }
 
-    public function create($request)
+    //Thêm
+    public function create(array $attributes)
     {
-        // TODO: Implement create() method.
+        return $this->model->newModelQuery()->create($attributes);
     }
 
-    public function update($request, $id)
+    //Sửa
+    public function update($id, array $attributes)
     {
-
+        return $this->find($id)->update($attributes);
     }
 
+    //Xoá
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        return $this->find($id)->delete();
     }
-
-
 }

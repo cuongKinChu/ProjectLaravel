@@ -44,14 +44,12 @@ class ProductController extends Controller
         try {
             $this->productAdminService->insert($request);
 
-            Session::flash('success', 'Add product successful');
+            Session::flash('success', 'Add product success');
             return redirect()->route('admin.product.index');
         } catch (\Exception $err) {
-            Session::flash('error', 'Add product fail');
-            Log::info($err->getMessage());
+            Session::flash('error', $err->getMessage());
             return redirect()->route('admin.product.add');
         }
-
     }
 
     //Display the specified resource.
@@ -60,7 +58,7 @@ class ProductController extends Controller
         //
     }
 
-    //Show the form for editing the specified resource.
+//Show the form for editing the specified resource.
     public function edit($id)
     {
         $product = $this->productAdminService->findById($id);
@@ -70,16 +68,15 @@ class ProductController extends Controller
         ]);
     }
 
-    //Update the specified resource in storage.
+//Update the specified resource in storage.
     public function update(ProductRequest $request, $id)
     {
         try {
-            $this->productAdminService->update($request, $id);
+            $this->productAdminService->updateById($request, $id);
             Session::flash('success', 'Update product successful');
             return redirect()->route('admin.product.index');
         } catch (\Exception $err) {
-            Session::flash('error', 'Update product fail');
-            Log::info($err->getMessage());
+            Session::flash('error', $err->getMessage());
             return redirect()->back();
         }
     }

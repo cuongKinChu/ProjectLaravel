@@ -29,12 +29,12 @@
                     <table class="table table-striped projects">
                         <thead>
                         <tr>
-                            <th style="width: 5%">ID</th>
-                            <th style="width: 20%">Full Name</th>
-                            <th style="width: 20%">Email</th>
-                            <th style="width: 15%">Phone</th>
-                            <th style="width: 15%">Order date</th>
-                            <th style="width: 10%">Action</th>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Order date</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
