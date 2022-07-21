@@ -61,9 +61,16 @@
                     </li>
                 </ul>
                 <div class="user_option">
-                    <a href="" class="user_link">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </a>
+                    @if(Auth::guard('cus')->check())
+                        <h5><i class="fa-solid fa-user text-primary"></i><a href=""> {{ Auth::guard('cus')->user()->full_name }}</a></h5>
+                        <div class="text-start ps-5">
+                            <a href=""><h5 class="text-uppercase"><i class="fa-solid fa-right-from-bracket fs-3 text-danger exit-account"></i></h5></a>
+                        </div>
+                    @else
+                        <a href="{{ route('homepage.login') }}" class="user_link">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                    @endif
                     <a class="cart_link" href="{{ route('cart.index') }}">
                         <i class="fa-solid fa-cart-shopping text-white px-1"></i>
                         <span class="badge bg-warning text-white ">{{$cart ->total_quantity}}</span>

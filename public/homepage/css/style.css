@@ -1005,3 +1005,14 @@ a:focus {
   color: inherit;
 }
 /*# sourceMappingURL=style.css.map */
+.bg-login-image {
+  background-image: url("../images/about.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.bg-register-image {
+  background-image: url("../images/about.jpg");
+  background-position: center;
+  background-size: cover;
+}

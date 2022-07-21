@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Services\Cart\CartService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -24,6 +25,7 @@ class CartController extends Controller
     //Show your cart:
     public function index(){
         return view('homepage.cart');
+
     }
 
     //Add product in cart:

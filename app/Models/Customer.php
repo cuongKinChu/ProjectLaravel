@@ -2,20 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
-    use HasFactory;
+    use Notifiable;
     protected $table = 'customers';
-    protected $fillable = ['full_name','email','address','phone','content'];
+    protected $fillable = ['customer_id','full_name','email','password','address','phone'];
 
     public function carts()
     {
         return $this->hasMany(Cart::class,'customer_id','id');
     }
-
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
 
 }

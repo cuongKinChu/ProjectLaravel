@@ -13,5 +13,4 @@ class HomeController extends Controller
         $product = Product::limit(10)->orderby('id','DESC')->get();
         return view('homepage.index',['data'=>$product]);
     }
-
 }
