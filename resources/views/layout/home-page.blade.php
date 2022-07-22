@@ -43,7 +43,7 @@
 <header class="header_section bg-dark">
     <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="">
             <span>
               Bubble Tea
             </span>
@@ -61,11 +61,9 @@
                     </li>
                 </ul>
                 <div class="user_option">
-                    @if(Auth::guard('cus')->check())
-                        <h5><i class="fa-solid fa-user text-primary"></i><a href=""> {{ Auth::guard('cus')->user()->full_name }}</a></h5>
-                        <div class="text-start ps-5">
-                            <a href=""><h5 class="text-uppercase"><i class="fa-solid fa-right-from-bracket fs-3 text-danger exit-account"></i></h5></a>
-                        </div>
+                    @if(session()->has('customer'))
+                        <i class="fa-solid fa-user text-primary"></i><a href=""> {{ session('customer')->full_name }}</a>
+                        <a href="{{ route('homepage.logout') }}" ><i class="fa fa-right-from-bracket text-danger exit-account"></i></a>
                     @else
                         <a href="{{ route('homepage.login') }}" class="user_link">
                             <i class="fa fa-user" aria-hidden="true"></i>

@@ -27,26 +27,30 @@ class CustomerController extends Controller
         ]);
     }
 
-    //Logout
-    public function logout()
-    {
-        Auth::guard('cus')->logout();
-        return redirect()->route('homepage.login');
-    }
-
     //Check login
     public function checkLogin(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email:filter',
+            'email' => 'required|email',
             'password' => 'required|min:8',
         ]);
-        $login = Auth::guard('cus')->attempt($request->only('email','password'));
+        $login = Auth::guard('cus')->attempt([
+            'email'=> $request ->input('email'),
+            'password'=> $request ->input('password')
+        ], $request->input('remember'));
         if($login){
+            session()->put('customer', Auth::guard('cus')->user());
             return redirect()->route('homepage.index');
         }
-        Session::flash('error', 'Email or Password is wrong');
         return redirect()->back();
+    }
+
+    //Logout
+    public function logout()
+    {
+        Auth::guard('cus')->logout();
+        session()->forget('customer');
+        return redirect()->route('homepage.login');
     }
 
     //Show the form for creating a new resource.

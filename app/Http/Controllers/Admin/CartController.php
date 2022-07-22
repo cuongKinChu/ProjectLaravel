@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\CartHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
-use App\Services\Cart\CartService;
 
 class CartController extends Controller
 {
@@ -14,7 +14,7 @@ class CartController extends Controller
     /**
      * @param $cart
      */
-    public function __construct(CartService $cart)
+    public function __construct(CartHelper $cart)
     {
         $this->cart = $cart;
     }

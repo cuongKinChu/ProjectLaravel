@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\Cart\CartService;
+use App\Helper\CartHelper;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         view()->composer('*',function ($view){
             $view ->with([
-                'cart' => new CartService()
+                'cart' => new CartHelper()
             ]);
         });
     }

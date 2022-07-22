@@ -14,10 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
-    Route::group(
-        [
-            'namespace' => 'HomePage',
-        ],
+    #Home
+    Route::group(['namespace' => 'HomePage'],
         function () {
             #Home page
             Route::get('/', 'HomeController@index')->name('homepage.index');
@@ -29,18 +27,23 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             #Login Customer
             Route::get('/login', 'CustomerController@index')->name('homepage.login');
             Route::post('/login', 'CustomerController@checkLogin')->name('homepage.login');
+            Route::get('/logout', 'CustomerController@logout')->name('homepage.logout');
+
 
             #Cart
             Route::group([
                 'prefix' => 'cart',
-                'name' => 'cart.',
+                'as' => 'cart.',
                 'middleware' => 'cus'
             ], function () {
-                Route::get('add/{id}/{quantity?}', 'CartController@create')->name('cart.add');
-                Route::get('index', 'CartController@index')->name('cart.index');
-                Route::get('remove/{id}', 'CartController@remove')->name('cart.remove');
-                Route::get('update/{id}/{quantity?}', 'CartController@update')->name('cart.update');
-                Route::post('index', 'CartController@checkout')->name('cart.index');
+                Route::get('add/{id}/{quantity?}', 'CartController@create')->name('add');
+                Route::get('index', 'CartController@index')->name('index');
+                Route::get('remove/{id}', 'CartController@remove')->name('remove');
+                Route::get('update/{id}/{quantity?}', 'CartController@update')->name('update');
+
+                #Check Out
+                Route::get('checkout', 'CheckoutController@index')->name('checkout');
+                Route::post('checkout', 'CheckoutController@checkout')->name('checkout');
             });
         });
 
@@ -56,12 +59,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('login', 'LoginController@index')->name('login');
         Route::post('login', 'LoginController@store')->name('login');
 
-
         #Function Admin
-        Route::group(
-            [
-                'middleware' => ['auth']
-            ],
+        Route::group(['middleware' => 'auth'],
             function () {
                 Route::get('/dashboard', 'MainController@index')->name('dashboard');
                 Route::get('/logout', 'LoginController@logout')->name('logout');
