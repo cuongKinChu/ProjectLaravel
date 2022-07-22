@@ -73,29 +73,30 @@
                 </div>
             </div>
         </li>
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.customers.index') }}">
+                <i class="fas fa-user"></i>
+                <span>Customer</span></a>
+        </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fa-solid fa-cart-shopping"></i>
-                <span>Cart</span>
+                <span>Order</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Cart Utilities:</h6>
-                    <a class="collapse-item" href="{{route('admin.customers.index')}}">List Order</a>
+                    <a class="collapse-item" href="{{route('admin.customers.list')}}">List Order</a>
                 </div>
             </div>
         </li>
 
-        {{--        <!-- Nav Item - Tables -->--}}
-        {{--        <li class="nav-item">--}}
-        {{--            <a class="nav-link" href="">--}}
-        {{--                <i class="fas fa-fw fa-table"></i>--}}
-        {{--                <span>Bills</span></a>--}}
-        {{--        </li>--}}
+
 
         <!-- Divider -->
         <hr class="sidebar-divider">

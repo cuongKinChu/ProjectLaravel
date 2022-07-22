@@ -1,15 +1,21 @@
 <?php
+
 namespace App\Services\Customer;
 
 use App\Repositories\Eloquent\CustomerRepository;
 
-class CustomerSevices
+class CustomerServices
 {
     private CustomerRepository $customerRepository;
 
     public function __construct(CustomerRepository $customerRepository)
     {
         $this->customerRepository = $customerRepository;
+    }
+
+    public function getAllCustomer()
+    {
+        return $this->customerRepository->getAll();
     }
 
     public function insert($request)

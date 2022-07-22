@@ -4,7 +4,7 @@ namespace App\Http\Controllers\HomePage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerRequest;
-use App\Services\Customer\CustomerSevices;
+use App\Services\Customer\CustomerServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -13,10 +13,9 @@ class CustomerController extends Controller
 {
     private $customerServices;
 
-    public function __construct(CustomerSevices $customerSevices)
+    public function __construct(CustomerServices $customerSevices)
     {
         $this->customerServices = $customerSevices;
-
     }
 
     //Login screen
@@ -35,10 +34,10 @@ class CustomerController extends Controller
             'password' => 'required|min:8',
         ]);
         $login = Auth::guard('cus')->attempt([
-            'email'=> $request ->input('email'),
-            'password'=> $request ->input('password')
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
         ], $request->input('remember'));
-        if($login){
+        if ($login) {
             session()->put('customer', Auth::guard('cus')->user());
             return redirect()->route('homepage.index');
         }

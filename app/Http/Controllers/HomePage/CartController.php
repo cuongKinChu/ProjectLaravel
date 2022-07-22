@@ -20,38 +20,39 @@ class CartController extends Controller
     }
 
     //Show your cart:
-    public function index(){
+    public function index()
+    {
         return view('homepage.cart');
 
     }
 
     //Add product in cart:
-    public function create(CartHelper $cart,$id)
+    public function create(CartHelper $cart, $id)
     {
         $quantity = request()->quantity ? request()->quantity : 1;
         $product = Product::find($id);
-        $cart->create($product,$quantity);
+        $cart->create($product, $quantity);
         return redirect()->route('cart.index');
     }
 
     //Delete from cart
-    public function remove(CartHelper $cart,$id){
+    public function remove(CartHelper $cart, $id)
+    {
         $cart->remove($id);
-        Session::flash('success','Delete product successful');
+        Session::flash('success', 'Delete product successful');
         return redirect()->back();
     }
 
     //Update cart
-    public function update(CartHelper $cart,$id){
+    public function update(CartHelper $cart, $id)
+    {
         $quantity = request()->quantity ? request()->quantity : 1;
-        if($quantity < 1)
-        {
-            Session::flash('error','Update cart unsuccessful');
+        if ($quantity < 1) {
+            Session::flash('error', 'Update cart unsuccessful');
             return redirect()->route('cart.index');
         }
-        $cart->update($id,$quantity);
-        Session::flash('success','Update cart successful');
+        $cart->update($id, $quantity);
+        Session::flash('success', 'Update cart successful');
         return redirect()->back();
     }
-
 }

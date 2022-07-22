@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Product\ProductRequest;
+use App\Http\Requests\ProductRequest;
 use App\Services\Product\ProductAdminService;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 
@@ -52,13 +51,7 @@ class ProductController extends Controller
         }
     }
 
-    //Display the specified resource.
-    public function show($id)
-    {
-        //
-    }
-
-//Show the form for editing the specified resource.
+    //Show the form for editing the specified resource.
     public function edit($id)
     {
         $product = $this->productAdminService->findById($id);
@@ -68,7 +61,7 @@ class ProductController extends Controller
         ]);
     }
 
-//Update the specified resource in storage.
+    //Update the specified resource in storage.
     public function update(ProductRequest $request, $id)
     {
         try {

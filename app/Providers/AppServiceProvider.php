@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-        view()->composer('*',function ($view){
-            $view ->with([
+        view()->composer('*', function ($view) {
+            $view->with([
                 'cart' => new CartHelper()
             ]);
         });

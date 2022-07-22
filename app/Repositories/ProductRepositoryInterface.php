@@ -14,7 +14,7 @@ interface ProductRepositoryInterface
     public function find($id);
 
     //Sửa product
-    public function update($request,$id);
+    public function update($request, $id);
 
     //Xoá product
     public function delete($id);

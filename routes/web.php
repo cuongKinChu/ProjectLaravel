@@ -86,9 +86,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                     'prefix' => 'customers',
                     'as' => 'customers.',
                 ], function () {
-                    Route::get('/', 'CartController@index')->name('index');
-                    Route::get('/view/{id}', 'CartController@show')->name('show');
-                    Route::get('/delete/{id}', 'CartController@destroy')->name('delete');
+                    Route::get('/', 'CustomerController@index')->name('index');
+                    Route::get('/list', 'OrderListController@index')->name('list');
+
+                    Route::get('/listorder-{customer_id}', 'OrderListController@showOrderOfCustomer')->name('ordercus');
+                    Route::get('/orderdetail-{id}', 'OrderListController@getOrderDetailByOrderId')->name('orderdetail');
                 });
             }
         );

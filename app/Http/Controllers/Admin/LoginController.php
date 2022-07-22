@@ -13,32 +13,33 @@ class LoginController extends Controller
     //Login screen
     public function index()
     {
-        return view('admin.login',[
-            'title'=>'Login to system'
+        return view('admin.login', [
+            'title' => 'Login to system'
         ]);
     }
 
     //Logout
-    public function logout(){
+    public function logout()
+    {
         Auth::guard('web')->logout();
         return redirect()->route('admin.login');
     }
 
     //Check login
-    public  function store(Request $request)
+    public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'email' => 'required|email:filter',
             'password' => 'required|min:8',
         ]);
 
-        if(Auth::attempt([
-            'email'=> $request ->input('email'),
-            'password'=> $request ->input('password')
-            ], $request->input('remember'))) {
+        if (Auth::attempt([
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
+        ], $request->input('remember'))) {
             return redirect()->route('admin.dashboard');
         }
-        Session::flash('error','Email or Password is wrong');
+        Session::flash('error', 'Email or Password is wrong');
         return redirect()->back();
     }
 }

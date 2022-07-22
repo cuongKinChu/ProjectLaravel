@@ -21,11 +21,10 @@
 
         <div class="customer mt-3">
             <ul>
-                <li>Customer name: <strong>{{$customer->full_name}}</strong></li>
-                <li>Phone number: <strong>{{$customer->phone}}</strong></li>
-                <li>Address: <strong>{{$customer->address}}</strong></li>
-                <li>Email: <strong>{{$customer->email}}</strong></li>
-                <li>Content: <strong>{{$customer->content}}</strong></li>
+                <li>Customer name: <strong>{{$orderbyId->full_name}}</strong></li>
+                <li>Phone number: <strong>{{$orderbyId->phone}}</strong></li>
+                <li>Address: <strong>{{$orderbyId->address}}</strong></li>
+                <li>Content: <strong>{{$orderbyId->order_note}}</strong></li>
             </ul>
         </div>
 
@@ -49,9 +48,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($carts as $key=>$cart)
+                        @foreach($orderdetailbyId as $key=>$cart)
                             @php
-                                $priceEnd = $cart->price * $cart->qty;
+                                $priceEnd = $cart->price * $cart->quantity;
                                 $total += $priceEnd;
                             @endphp
                             <tr>
@@ -63,7 +62,7 @@
                                 </td>
                                 <td class="project_progress">{{ number_format($cart->product->price,0,',','.') }} VND</td>
                                 <td>
-                                    <a>{{ $cart->qty }}</a>
+                                    <a>{{ $cart->quantity }}</a>
                                 </td>
                                 <td class="project_progress">{{ number_format($priceEnd,0,',','.') }} VND</td>
 
@@ -74,7 +73,7 @@
                     </table>
                     <div class="row p-1">
                         <div class="col-12">
-                            <a href="{{ route('admin.customers.index') }}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{ route('admin.customers.list') }}" class="btn btn-secondary">Cancel</a>
                             <p class=" float-right"><strong>Total:</strong> {{ number_format($total,0,',','.') }} VND</p>
                         </div>
                     </div>
