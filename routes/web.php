@@ -13,6 +13,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    #Admin
+    Route::group(
+        [
+            'namespace' => 'Admin',
+            'as' => 'admin.'
+        ], function () {
+        Route::get('/', 'MainController@index')->name('dashboard');
+
+        #Product
+        Route::resource('product', 'ProductController');
+
+        #Customer
+        Route::resource('customer', 'CustomerController');
+
+        #Checkout
+        Route::group([
+            'prefix' => 'cart',
+            'as' => 'cart.',
+        ], function () {
+            Route::get('add/{id}/{quantity?}', 'CheckoutController@create')
+                ->name('add');
+            Route::get('remove/{id}', 'CheckoutController@remove')
+                ->name('remove');
+            Route::get('update/{id}/{quantity?}', 'CheckoutController@update')
+                ->name('update');
+        });
+
+        #Order
+        Route::group([
+            'prefix' => 'order',
+            'as' => 'order.',
+        ], function () {
+            Route::post('/search', 'OrderListController@searchOrder')->name('search');
+        });
+        #Order
+        Route::resource('order', 'OrderListController');
+
+    });
 });
