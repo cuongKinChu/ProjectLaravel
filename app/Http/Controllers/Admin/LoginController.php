@@ -18,6 +18,12 @@ class LoginController extends Controller
         ]);
     }
 
+    //Logout
+    public function logout(){
+        Auth::guard('web')->logout();
+        return redirect()->route('login');
+    }
+
     //
     public  function store(Request $request)
     {
