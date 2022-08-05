@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Repositories\CustomerRepositoryInterface;
 use App\Repositories\Eloquent\CustomerRepository;
+use App\Repositories\Eloquent\NotifyRespository;
 use App\Repositories\Eloquent\OrderDetailRepository;
 use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\ProductRepository;
+use App\Repositories\NotifyRespositoryInterface;
 use App\Repositories\OrderDetailRepositoryInterface;
 use App\Repositories\OrderRepositoryInterface;
 use App\Repositories\ProductRepositoryInterface;
@@ -30,6 +32,8 @@ class RepositoryServiceProvider extends ServiceProvider
             OrderRepository::class);
         $this->app->bind(OrderDetailRepositoryInterface::class,
             OrderDetailRepository::class);
+        $this->app->bind(NotifyRespositoryInterface::class,
+            NotifyRespository::class);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\OrderProcessed;
 use App\Http\Controllers\Controller;
 use App\Services\CheckoutService;
 use App\Services\CustomerService;
@@ -57,6 +58,8 @@ class OrderListController extends Controller
     public function store(Request $request)
     {
         $this->checkoutServices->checkout($request);
+
+        event(new OrderProcessed($request->input('customer')));
         return redirect()->back();
     }
 
